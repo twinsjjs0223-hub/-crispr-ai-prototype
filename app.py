@@ -38,7 +38,7 @@ def read_csv_safely(file_bytes: bytes) -> pd.DataFrame:
     for encoding in ("utf-8-sig", "cp949", "euc-kr"):
         try:
             text = file_bytes.decode(encoding)
-            frame = pd.read_csv(io.StringIO(text), sep=None, engine="python")
+            frame = pd.read_csv(io.StringIO(text), sep=",", engine="python")
             break
         except Exception as exc:  # 인코딩/구분자 문제를 다음 후보에서 재시도
             errors.append(f"{encoding}: {exc}")
